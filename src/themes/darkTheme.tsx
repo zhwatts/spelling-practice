@@ -1,8 +1,8 @@
-import { createTheme } from "@mui/material";
+import { PaletteMode } from "@mui/material";
 
-export const dark = createTheme({
+export const darkTheme = {
   palette: {
-    mode: "dark",
+    mode: "dark" as PaletteMode,
 
     background: {
       default: "#428F99",
@@ -10,7 +10,7 @@ export const dark = createTheme({
     },
 
     text: {
-      primary: "#fff", //text
+      primary: "#fff", // text
       secondary: "#ff0000",
     },
 
@@ -32,4 +32,4 @@ export const dark = createTheme({
       dark: "#000",
     },
   },
-});
+};

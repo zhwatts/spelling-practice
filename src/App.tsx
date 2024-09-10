@@ -1,52 +1,98 @@
-import {
-  Box,
-  Grid2 as Grid,
-  Switch,
-  Typography,
-  useColorScheme,
-} from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
+import { useEffect, useState } from "react";
+
+import { IWordList } from "./interfaces/IWordList";
+import WordList from "./components/lists/WordList";
+import BrandedHeader from "./components/BrandedHeader";
+import DownloadGameButton from "./components/buttons/DownloadGameButton";
+import GlobalFooter from "./components/GlobalFooter";
+import ListContent from "./pages/ListContent";
+
+const savedWordLists: IWordList[] = [];
+const placeHolderWordList: IWordList = {
+  id: 1,
+  title: "My First Spelling List",
+};
 
 const App = () => {
-  const { mode, setMode } = useColorScheme();
+  const [wordLists, setWordLists] = useState<IWordList[]>([]);
+  const [focusedList, setFocusedList] = useState<IWordList>();
+  const [checkedLists, setCheckedLists] = useState<IWordList[]>([]);
 
-  if (!mode) {
-    return null;
-  }
+  useEffect(() => {
+    setWordLists(savedWordLists);
 
-  const darkMode: boolean = !(mode === "light");
+    if (savedWordLists.length > 0) {
+      setFocusedList(savedWordLists[0]);
+    }
+
+    if (savedWordLists.length > 0) {
+      setCheckedLists([savedWordLists[0]]);
+    }
+
+    if (savedWordLists.length === 0) {
+      setWordLists([placeHolderWordList]);
+      setFocusedList(placeHolderWordList);
+      setCheckedLists([placeHolderWordList]);
+    }
+  }, []);
+
+  const handleCheckedList = (list: IWordList) => {
+    const itemChecked = checkedLists.includes(list);
+
+    if (itemChecked) {
+      setCheckedLists(
+        checkedLists.filter((checkedList) => checkedList !== list)
+      );
+    } else {
+      setCheckedLists([...checkedLists, list]);
+    }
+  };
+
+  const handleCreateList = () =>
+    setWordLists([
+      ...wordLists,
+      {
+        id: wordLists.length + 1,
+        title: "A New List...",
+      },
+    ]);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        height: "100%",
-      }}
+    <Grid
+      container
+      spacing={2}
+      direction="column"
+      sx={{ maxWidth: "1000px", margin: "0px auto", minHeight: "100%" }}
     >
-      <Grid
-        container
-        sx={{
-          width: "100%",
-          maxWidth: "1000px",
-          backgroundColor: "paper",
-        }}
-      >
-        <Grid size={5} mt={8}>
-          <Typography component="h1" variant="h4" color="success">
-            Spell_ing Pract_ce
-          </Typography>
+      <Grid container size={12} flexGrow={2} pt={8}>
+        <Grid
+          container
+          direction="column"
+          spacing={1}
+          sx={{ minWidth: "400px" }}
+        >
+          <BrandedHeader />
 
-          <Switch
-            color="secondary"
-            checked={darkMode}
-            onClick={() => (darkMode ? setMode("light") : setMode("dark"))}
+          <WordList
+            handleCreateList={handleCreateList}
+            wordLists={wordLists}
+            focusedList={focusedList}
+            checkedLists={checkedLists}
+            setFocusedList={setFocusedList}
+            handleCheckedList={handleCheckedList}
           />
+
+          <DownloadGameButton checkedListCount={Number(checkedLists.length)} />
         </Grid>
-        <Grid size={7} mt={8}>
-          Right Section
-        </Grid>
+
+        <ListContent focusedList={focusedList} />
       </Grid>
-    </Box>
+
+      <Grid container size={12}>
+        <GlobalFooter />
+      </Grid>
+    </Grid>
   );
 };
 

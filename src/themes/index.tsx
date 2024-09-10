@@ -1,14 +1,16 @@
 import { createTheme } from "@mui/material";
-import { dark } from "./darkTheme";
-import { light } from "./lightTheme";
+import { darkTheme } from "./darkTheme";
+import { lightTheme } from "./lightTheme";
 
 const theme = createTheme({
+  colorSchemes: {
+    dark: darkTheme,
+    light: lightTheme,
+  },
+
   components: {},
 
-  colorSchemes: {
-    dark,
-    light,
-  },
+  typography: {},
 });
 
 export default theme;

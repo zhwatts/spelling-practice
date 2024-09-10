@@ -7,35 +7,37 @@ import BrandedHeader from "./components/BrandedHeader";
 import DownloadGameButton from "./components/buttons/DownloadGameButton";
 import GlobalFooter from "./components/GlobalFooter";
 import ListContent from "./pages/ListContent";
+import useSpellingLists from "./hooks";
 
-const savedWordLists: IWordList[] = [];
 const placeHolderWordList: IWordList = {
   id: 1,
   title: "My First Spelling List",
 };
 
 const App = () => {
+  const { spellingLists, addSpellingList } = useSpellingLists();
+
   const [wordLists, setWordLists] = useState<IWordList[]>([]);
   const [focusedList, setFocusedList] = useState<IWordList>();
   const [checkedLists, setCheckedLists] = useState<IWordList[]>([]);
 
   useEffect(() => {
-    setWordLists(savedWordLists);
+    setWordLists(spellingLists);
 
-    if (savedWordLists.length > 0) {
-      setFocusedList(savedWordLists[0]);
+    if (spellingLists.length > 0) {
+      setFocusedList(spellingLists[0]);
     }
 
-    if (savedWordLists.length > 0) {
-      setCheckedLists([savedWordLists[0]]);
+    if (spellingLists.length > 0) {
+      setCheckedLists([spellingLists[0]]);
     }
 
-    if (savedWordLists.length === 0) {
+    if (spellingLists.length === 0) {
       setWordLists([placeHolderWordList]);
       setFocusedList(placeHolderWordList);
       setCheckedLists([placeHolderWordList]);
     }
-  }, []);
+  }, [spellingLists]);
 
   const handleCheckedList = (list: IWordList) => {
     const itemChecked = checkedLists.includes(list);
@@ -50,13 +52,11 @@ const App = () => {
   };
 
   const handleCreateList = () =>
-    setWordLists([
-      ...wordLists,
-      {
-        id: wordLists.length + 1,
-        title: "A New List...",
-      },
-    ]);
+    addSpellingList({
+      id: wordLists.length + 1,
+      title: "A New List...",
+      words: [],
+    });
 
   return (
     <Grid

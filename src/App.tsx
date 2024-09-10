@@ -1,8 +1,6 @@
 import {
   Box,
-  Button,
   Grid2 as Grid,
-  Paper,
   Switch,
   Typography,
   useColorScheme,

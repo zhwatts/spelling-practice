@@ -1,45 +1,26 @@
 import { Grid2 as Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-
-import { IWordList } from "./interfaces/IWordList";
 import WordList from "./components/lists/WordList";
 import BrandedHeader from "./components/BrandedHeader";
 import DownloadGameButton from "./components/buttons/DownloadGameButton";
 import GlobalFooter from "./components/GlobalFooter";
 import ListContent from "./pages/ListContent";
-import useSpellingLists from "./hooks";
-
-const placeHolderWordList: IWordList = {
-  id: 1,
-  title: "My First Spelling List",
-};
+import { useSpellingListsContext } from "./context/spellingContext";
+import { ISpellingList } from "./interfaces/ISpellingList";
 
 const App = () => {
-  const { spellingLists, addSpellingList } = useSpellingLists();
-
-  const [wordLists, setWordLists] = useState<IWordList[]>([]);
-  const [focusedList, setFocusedList] = useState<IWordList>();
-  const [checkedLists, setCheckedLists] = useState<IWordList[]>([]);
+  const { spellingLists, addSpellingList } = useSpellingListsContext();
+  const [focusedList, setFocusedList] = useState<ISpellingList>();
+  const [checkedLists, setCheckedLists] = useState<ISpellingList[]>([]);
 
   useEffect(() => {
-    setWordLists(spellingLists);
-
     if (spellingLists.length > 0) {
       setFocusedList(spellingLists[0]);
-    }
-
-    if (spellingLists.length > 0) {
       setCheckedLists([spellingLists[0]]);
-    }
-
-    if (spellingLists.length === 0) {
-      setWordLists([placeHolderWordList]);
-      setFocusedList(placeHolderWordList);
-      setCheckedLists([placeHolderWordList]);
     }
   }, [spellingLists]);
 
-  const handleCheckedList = (list: IWordList) => {
+  const handleCheckedList = (list: ISpellingList) => {
     const itemChecked = checkedLists.includes(list);
 
     if (itemChecked) {
@@ -53,7 +34,7 @@ const App = () => {
 
   const handleCreateList = () =>
     addSpellingList({
-      id: wordLists.length + 1,
+      id: spellingLists.length + 1,
       title: "A New List...",
       words: [],
     });
@@ -73,22 +54,18 @@ const App = () => {
           sx={{ minWidth: "400px" }}
         >
           <BrandedHeader />
-
           <WordList
             handleCreateList={handleCreateList}
-            wordLists={wordLists}
             focusedList={focusedList}
             checkedLists={checkedLists}
             setFocusedList={setFocusedList}
             handleCheckedList={handleCheckedList}
           />
-
           <DownloadGameButton checkedListCount={Number(checkedLists.length)} />
         </Grid>
 
         <ListContent focusedList={focusedList} />
       </Grid>
-
       <Grid container size={12}>
         <GlobalFooter />
       </Grid>

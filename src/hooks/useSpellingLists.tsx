@@ -17,7 +17,7 @@ export function useSpellingLists() {
         {
           id: 1,
           title: "My First Spelling List",
-          words: ["Example", "Placeholder", "Words"],
+          words: ["Annoy", "Avoid", "Thousand"],
         },
       ];
 
@@ -30,24 +30,33 @@ export function useSpellingLists() {
 
   const updateLocalStorage = (lists: SpellingList[]) => {
     localStorage.setItem("spellingLists", JSON.stringify(lists));
-    setSpellingLists(lists);
   };
 
   const addSpellingList = (newList: SpellingList) => {
-    const updatedLists = [...spellingLists, newList];
-    updateLocalStorage(updatedLists);
+    setSpellingLists((prevLists) => {
+      const updatedLists = [...prevLists, newList];
+      updateLocalStorage(updatedLists);
+      return updatedLists;
+    });
   };
 
   const editSpellingList = (id: number, updatedList: SpellingList) => {
-    const updatedLists = spellingLists.map((list) =>
-      list.id === id ? updatedList : list
-    );
-    updateLocalStorage(updatedLists);
+    setSpellingLists((prevLists) => {
+      const updatedLists = prevLists.map((list) =>
+        list.id === id ? updatedList : list
+      );
+
+      updateLocalStorage(updatedLists);
+      return updatedLists;
+    });
   };
 
   const deleteSpellingList = (id: number) => {
-    const updatedLists = spellingLists.filter((list) => list.id !== id);
-    updateLocalStorage(updatedLists);
+    setSpellingLists((prevLists) => {
+      const updatedLists = prevLists.filter((list) => list.id !== id);
+      updateLocalStorage(updatedLists);
+      return updatedLists;
+    });
   };
 
   return {

@@ -1,23 +1,24 @@
 import { Button, List, ListItem, Paper } from "@mui/material";
 import { WordListItem } from "../WordListItems";
-import { IWordList } from "../../../interfaces/IWordList";
 import { Dispatch, SetStateAction } from "react";
+import useSpellingListsContext from "../../../context";
+import { ISpellingList } from "../../../interfaces/ISpellingList";
 
 export function WordList({
   handleCreateList,
-  wordLists,
   focusedList,
   checkedLists,
   setFocusedList,
   handleCheckedList,
 }: {
   handleCreateList: VoidFunction;
-  wordLists: IWordList[];
-  focusedList?: IWordList;
-  checkedLists: IWordList[];
-  setFocusedList: Dispatch<SetStateAction<IWordList | undefined>>;
-  handleCheckedList: (list: IWordList) => void;
+  focusedList?: ISpellingList;
+  checkedLists: ISpellingList[];
+  setFocusedList: Dispatch<SetStateAction<ISpellingList | undefined>>;
+  handleCheckedList: (list: ISpellingList) => void;
 }) {
+  const { spellingLists } = useSpellingListsContext();
+
   return (
     <Paper
       elevation={0}
@@ -40,7 +41,7 @@ export function WordList({
           </Button>
         </ListItem>
 
-        {wordLists.map((list) => (
+        {spellingLists.map((list) => (
           <WordListItem
             key={list.id}
             id={list.id}

@@ -1,5 +1,5 @@
 export interface ISpellingList {
-  title: string;
   id: number;
+  title: string;
   words: string[];
 }

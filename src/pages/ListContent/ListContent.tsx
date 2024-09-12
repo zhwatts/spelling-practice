@@ -1,3 +1,5 @@
+/** @format */
+
 import { Grid2 as Grid, List, ListItem, ListItemText } from "@mui/material";
 import SpellingListTitle from "../../components/SpellingListTitle";
 import SpellingWordInput from "../../components/textinputs/SpellingWordInput";
@@ -14,7 +16,13 @@ export function ListContent({ focusedList }: { focusedList?: ISpellingList }) {
         {focusedList?.words.map((word, key) => (
           <ListItem
             key={key}
-            sx={{ borderBottom: "1px dashed", borderColor: "primary.main" }}
+            sx={{
+              borderBottom: "1px dashed",
+              borderColor: "primary.main",
+              ":last-child": {
+                borderBottom: "none",
+              },
+            }}
           >
             <ListItemText>{word}</ListItemText>
           </ListItem>

@@ -1,23 +1,20 @@
-import { useState, useEffect } from "react";
+/** @format */
 
-interface SpellingList {
-  id: number;
-  title: string;
-  words: string[];
-}
+import { useState, useEffect } from "react";
+import { ISpellingList } from "../interfaces/ISpellingList";
 
 export function useSpellingLists() {
-  const [spellingLists, setSpellingLists] = useState<SpellingList[]>([]);
+  const [spellingLists, setSpellingLists] = useState<ISpellingList[]>([]);
 
   useEffect(() => {
     const storedLists = localStorage.getItem("spellingLists");
 
     if (!storedLists) {
-      const placeholderList: SpellingList[] = [
+      const placeholderList: ISpellingList[] = [
         {
           id: 1,
           title: "My First Spelling List",
-          words: ["Annoy", "Avoid", "Thousand"],
+          words: ["Glance", "Chance", "Prance", "Dance", "Stance"],
         },
       ];
 
@@ -28,11 +25,11 @@ export function useSpellingLists() {
     }
   }, []);
 
-  const updateLocalStorage = (lists: SpellingList[]) => {
+  const updateLocalStorage = (lists: ISpellingList[]) => {
     localStorage.setItem("spellingLists", JSON.stringify(lists));
   };
 
-  const addSpellingList = (newList: SpellingList) => {
+  const addSpellingList = (newList: ISpellingList) => {
     setSpellingLists((prevLists) => {
       const updatedLists = [...prevLists, newList];
       updateLocalStorage(updatedLists);
@@ -40,7 +37,7 @@ export function useSpellingLists() {
     });
   };
 
-  const editSpellingList = (id: number, updatedList: SpellingList) => {
+  const editSpellingList = (id: number, updatedList: ISpellingList) => {
     setSpellingLists((prevLists) => {
       const updatedLists = prevLists.map((list) =>
         list.id === id ? updatedList : list

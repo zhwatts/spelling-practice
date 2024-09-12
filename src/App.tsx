@@ -1,3 +1,5 @@
+/** @format */
+
 import { Grid2 as Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import WordList from "./components/lists/WordList";
@@ -67,7 +69,7 @@ const App = () => {
           <DownloadGameButton checkedListCount={Number(checkedLists.length)} />
         </Grid>
 
-        <ListContent focusedList={focusedList} />
+        <ListContent />
       </Grid>
       <Grid container size={12}>
         <GlobalFooter />

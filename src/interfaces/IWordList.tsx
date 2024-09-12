@@ -1,4 +1,6 @@
-export interface IWordList {
-  id: number;
-  title: string;
-}
+/** @format */
+
+export type IWordList = {
+  words: string[];
+  handleDeleteWord: ({ targetWord }: { targetWord: string }) => void;
+};

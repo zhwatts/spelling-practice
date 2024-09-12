@@ -1,7 +1,9 @@
+/** @format */
+
 import { SelectedWordListItem } from "./SelectedWordListItem";
 import { UnselectedWordListItem } from "./UnselectedWordListItem";
 
-const WordListItem = ({
+const SpellingListItem = ({
   id,
   children,
   primaryAction,
@@ -35,4 +37,4 @@ const WordListItem = ({
     </UnselectedWordListItem>
   );
 
-export default WordListItem;
+export default SpellingListItem;

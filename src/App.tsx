@@ -2,18 +2,17 @@
 
 import { Grid2 as Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-import WordList from "./components/lists/WordList";
 import BrandedHeader from "./components/BrandedHeader";
 import DownloadGameButton from "./components/buttons/DownloadGameButton";
 import GlobalFooter from "./components/GlobalFooter";
 import ListContent from "./pages/ListContent";
 import { useSpellingListsContext } from "./context/spellingContext";
 import { ISpellingList } from "./interfaces/ISpellingList";
+import SpellingLists from "./components/lists/WordList";
 
 const App = () => {
   const { spellingLists, addSpellingList, focusedList, setFocusedList } =
     useSpellingListsContext();
-  // const { focusedList, setFocusedList } = useFocusList();
   const [checkedLists, setCheckedLists] = useState<ISpellingList[]>([]);
 
   useEffect(() => {
@@ -58,7 +57,7 @@ const App = () => {
         <Grid container direction="column" spacing={1}>
           <BrandedHeader />
 
-          <WordList
+          <SpellingLists
             handleCreateList={handleCreateList}
             focusedList={focusedList}
             checkedLists={checkedLists}

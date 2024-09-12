@@ -1,1 +1,3 @@
-export { WordList as default } from "./WordList";
+/** @format */
+
+export { SpellingLists as default } from "./SpellingLists";

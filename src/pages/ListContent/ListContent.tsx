@@ -1,61 +1,28 @@
 /** @format */
 
-import {
-  Grid2 as Grid,
-  IconButton,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Typography,
-} from "@mui/material";
+import { Grid2 as Grid, List, ListItem, ListItemText } from "@mui/material";
 import SpellingListTitle from "../../components/SpellingListTitle";
 import SpellingWordInput from "../../components/textinputs/SpellingWordInput";
-import { Delete } from "@mui/icons-material";
 import useSpellingListsContext from "../../context";
-import { IWordList } from "../../interfaces/IWordList";
-
-const WordList: React.FC<IWordList> = ({ words, handleDeleteWord }) =>
-  words.map((word, key) => (
-    <ListItem
-      key={key}
-      sx={{
-        p: 0,
-        py: 1,
-        borderBottom: "1px dashed",
-        borderColor: "primary.main",
-        ":last-child": {
-          borderBottom: "none",
-        },
-      }}
-    >
-      <ListItemIcon>
-        <IconButton onClick={() => handleDeleteWord({ targetWord: word })}>
-          <Delete color={"primary"} />
-        </IconButton>
-      </ListItemIcon>
-
-      <Typography variant="h5" fontWeight="bold">
-        {word}
-      </Typography>
-    </ListItem>
-  ));
+import WordList from "../../components/WordList";
 
 export function ListContent() {
   const { focusedList, setFocusedList, editSpellingList } =
     useSpellingListsContext();
 
   const handleDeleteWord = ({ targetWord }: { targetWord: string }) => {
-    if (focusedList) {
-      const updatedWordList = focusedList?.words.filter(
-        (word: string) => word !== targetWord
-      );
-
-      const updatedFocusedList = { ...focusedList, words: updatedWordList };
-
-      editSpellingList(focusedList.id, updatedFocusedList);
-      setFocusedList(updatedFocusedList);
+    if (!focusedList) {
+      return;
     }
+
+    const updatedWordList = focusedList?.words.filter(
+      (word: string) => word !== targetWord
+    );
+
+    const updatedFocusedList = { ...focusedList, words: updatedWordList };
+
+    editSpellingList(focusedList.id, updatedFocusedList);
+    setFocusedList(updatedFocusedList);
   };
 
   return (

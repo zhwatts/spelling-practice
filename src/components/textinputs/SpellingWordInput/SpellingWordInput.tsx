@@ -1,3 +1,5 @@
+/** @format */
+
 import { AddCircleOutline } from "@mui/icons-material";
 import { IconButton, TextField } from "@mui/material";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
@@ -8,7 +10,8 @@ type FormValues = {
 };
 
 export function SpellingWordInput() {
-  const { editSpellingList, focusedList, setFocusedList } = useSpellingListsContext();
+  const { editSpellingList, focusedList, setFocusedList } =
+    useSpellingListsContext();
 
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -23,16 +26,14 @@ export function SpellingWordInput() {
       const updatedFocusedList = {
         ...focusedList,
         words: updatedWords,
-      }
+      };
 
-      editSpellingList(focusedList.id,updatedFocusedList );
-
-      setFocusedList(updatedFocusedList)
+      editSpellingList(focusedList.id, updatedFocusedList);
+      setFocusedList(updatedFocusedList);
 
       reset({ word: "" });
     }
   };
-
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

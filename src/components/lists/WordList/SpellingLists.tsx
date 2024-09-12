@@ -1,10 +1,12 @@
+/** @format */
+
 import { Button, List, ListItem, Paper } from "@mui/material";
-import { WordListItem } from "../WordListItems";
 import { Dispatch, SetStateAction } from "react";
 import useSpellingListsContext from "../../../context";
 import { ISpellingList } from "../../../interfaces/ISpellingList";
+import { SpellingList } from "../SpellingListItems";
 
-export function WordList({
+export function SpellingLists({
   handleCreateList,
   focusedList,
   checkedLists,
@@ -43,7 +45,7 @@ export function WordList({
         </ListItem>
 
         {spellingLists.map((list) => (
-          <WordListItem
+          <SpellingList
             key={list.id}
             id={list.id}
             selected={focusedList && focusedList.id === list.id}
@@ -52,7 +54,7 @@ export function WordList({
             secondaryAction={() => handleCheckedList(list)}
           >
             {list.title}
-          </WordListItem>
+          </SpellingList>
         ))}
       </List>
     </Paper>

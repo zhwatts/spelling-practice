@@ -29,6 +29,14 @@ export const SelectedWordListItem = ({
       </IconButton>
     }
   >
-    <ListItemText>{children}</ListItemText>
+    <ListItemText
+      sx={{
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+      }}
+    >
+      {children}
+    </ListItemText>
   </ListItem>
 );

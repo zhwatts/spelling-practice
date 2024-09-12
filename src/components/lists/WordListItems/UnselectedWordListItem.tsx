@@ -36,7 +36,16 @@ export const UnselectedWordListItem = ({
     }
   >
     <ListItemButton onClick={primaryAction}>
-      <ListItemText>{children}</ListItemText>
+      <ListItemText
+        sx={{
+          maxWidth: "370px",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+        }}
+      >
+        {children}
+      </ListItemText>
     </ListItemButton>
   </ListItem>
 );

@@ -7,6 +7,7 @@ export function ListContent({ focusedList }: { focusedList?: ISpellingList }) {
   return (
     <Grid container direction="column" flexGrow={2} spacing={1}>
       <SpellingListTitle listId={focusedList?.id ?? 1} />
+
       <SpellingWordInput />
 
       <List sx={{ px: "35px" }}>

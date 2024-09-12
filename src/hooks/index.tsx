@@ -1,1 +1,2 @@
-export { useSpellingLists as default } from "./useSpellingLists";
+export { useSpellingLists as useSpellingLists } from "./useSpellingLists";
+export { useFocusList as useFocusList } from "./useFocusList";

@@ -1,12 +1,21 @@
-import React, { createContext, useContext, ReactNode } from "react";
-import useSpellingLists from "../hooks";
+import React, {
+  createContext,
+  useContext,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+} from "react";
+
+import { useSpellingLists, useFocusList } from "../hooks";
 import { ISpellingList } from "../interfaces/ISpellingList";
 
 interface SpellingListsContextType {
   spellingLists: ISpellingList[];
+  focusedList: ISpellingList | undefined;
   addSpellingList: (newList: ISpellingList) => void;
   editSpellingList: (id: number, updatedList: ISpellingList) => void;
   deleteSpellingList: (id: number) => void;
+  setFocusedList: Dispatch<SetStateAction<ISpellingList | undefined>>;
 }
 
 const SpellingListsContext = createContext<
@@ -24,6 +33,8 @@ export const SpellingListsProvider: React.FC<{ children: ReactNode }> = ({
     deleteSpellingList,
   } = useSpellingLists();
 
+  const { focusedList, setFocusedList } = useFocusList();
+
   return (
     <SpellingListsContext.Provider
       value={{
@@ -31,6 +42,8 @@ export const SpellingListsProvider: React.FC<{ children: ReactNode }> = ({
         addSpellingList,
         editSpellingList,
         deleteSpellingList,
+        focusedList,
+        setFocusedList,
       }}
     >
       {children}
@@ -38,7 +51,6 @@ export const SpellingListsProvider: React.FC<{ children: ReactNode }> = ({
   );
 };
 
-// Custom hook to use the SpellingListsContext
 export const useSpellingListsContext = () => {
   const context = useContext(SpellingListsContext);
   if (context === undefined) {

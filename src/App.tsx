@@ -9,16 +9,17 @@ import { useSpellingListsContext } from "./context/spellingContext";
 import { ISpellingList } from "./interfaces/ISpellingList";
 
 const App = () => {
-  const { spellingLists, addSpellingList } = useSpellingListsContext();
-  const [focusedList, setFocusedList] = useState<ISpellingList>();
+  const { spellingLists, addSpellingList, focusedList, setFocusedList } =
+    useSpellingListsContext();
+  // const { focusedList, setFocusedList } = useFocusList();
   const [checkedLists, setCheckedLists] = useState<ISpellingList[]>([]);
 
   useEffect(() => {
-    if (spellingLists.length > 0) {
+    if (!focusedList && spellingLists.length > 0) {
       setFocusedList(spellingLists[0]);
       setCheckedLists([spellingLists[0]]);
     }
-  }, [spellingLists]);
+  }, [spellingLists, setFocusedList, focusedList]);
 
   const handleCheckedList = (list: ISpellingList) => {
     const itemChecked = checkedLists.includes(list);
@@ -44,16 +45,17 @@ const App = () => {
       container
       spacing={2}
       direction="column"
-      sx={{ maxWidth: "1000px", margin: "0px auto", minHeight: "100%" }}
+      sx={{
+        maxWidth: "1440px",
+        margin: "0px auto",
+        minHeight: "100%",
+        px: "50px",
+      }}
     >
       <Grid container size={12} flexGrow={2} pt={8}>
-        <Grid
-          container
-          direction="column"
-          spacing={1}
-          sx={{ minWidth: "400px" }}
-        >
+        <Grid container direction="column" spacing={1}>
           <BrandedHeader />
+
           <WordList
             handleCreateList={handleCreateList}
             focusedList={focusedList}
@@ -61,6 +63,7 @@ const App = () => {
             setFocusedList={setFocusedList}
             handleCheckedList={handleCheckedList}
           />
+
           <DownloadGameButton checkedListCount={Number(checkedLists.length)} />
         </Grid>
 

@@ -90,7 +90,13 @@ export const SpellingListTitle: React.FC<EditableSpellingListTitleProps> = ({
           variant="h4"
           color="primary.contrastText"
           onClick={() => setIsEditing(true)}
-          sx={{ cursor: "pointer" }}
+          sx={{
+            cursor: "pointer",
+            maxWidth: "725px",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}
         >
           {selectedList.title}
         </Typography>

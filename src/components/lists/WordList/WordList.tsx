@@ -23,6 +23,7 @@ export function WordList({
     <Paper
       elevation={0}
       sx={{
+        width: "450px",
         borderColor: "primary.light",
         borderStyle: "solid",
         borderWidth: "1px",

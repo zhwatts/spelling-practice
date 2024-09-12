@@ -1,35 +1,80 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+/** @format */
 
-function App() {
-  const [count, setCount] = useState(0)
+import { Grid2 as Grid } from "@mui/material";
+import { useEffect, useState } from "react";
+import BrandedHeader from "./components/BrandedHeader";
+import DownloadGameButton from "./components/buttons/DownloadGameButton";
+import GlobalFooter from "./components/GlobalFooter";
+import ListContent from "./pages/ListContent";
+import { useSpellingListsContext } from "./context/spellingContext";
+import { ISpellingList } from "./interfaces/ISpellingList";
+import SpellingLists from "./components/lists/WordList";
+
+const App = () => {
+  const { spellingLists, addSpellingList, focusedList, setFocusedList } =
+    useSpellingListsContext();
+  const [checkedLists, setCheckedLists] = useState<ISpellingList[]>([]);
+
+  useEffect(() => {
+    if (!focusedList && spellingLists.length > 0) {
+      setFocusedList(spellingLists[0]);
+      setCheckedLists([spellingLists[0]]);
+    }
+  }, [spellingLists, setFocusedList, focusedList]);
+
+  const handleCheckedList = (list: ISpellingList) => {
+    const itemChecked = checkedLists.includes(list);
+
+    if (itemChecked) {
+      setCheckedLists(
+        checkedLists.filter((checkedList) => checkedList !== list)
+      );
+    } else {
+      setCheckedLists([...checkedLists, list]);
+    }
+  };
+
+  const handleCreateList = () =>
+    addSpellingList({
+      id: spellingLists.length + 1,
+      title: "A New List...",
+      words: [],
+    });
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Grid
+      container
+      spacing={2}
+      direction="column"
+      sx={{
+        maxWidth: "1440px",
+        margin: "0px auto",
+        minHeight: "100%",
+        px: "50px",
+      }}
+    >
+      <Grid container size={12} flexGrow={2} pt={8}>
+        <Grid container direction="column" spacing={1}>
+          <BrandedHeader />
 
-export default App
+          <SpellingLists
+            handleCreateList={handleCreateList}
+            focusedList={focusedList}
+            checkedLists={checkedLists}
+            setFocusedList={setFocusedList}
+            handleCheckedList={handleCheckedList}
+          />
+
+          <DownloadGameButton checkedListCount={Number(checkedLists.length)} />
+        </Grid>
+
+        <ListContent />
+      </Grid>
+      <Grid container size={12}>
+        <GlobalFooter />
+      </Grid>
+    </Grid>
+  );
+};
+
+export default App;

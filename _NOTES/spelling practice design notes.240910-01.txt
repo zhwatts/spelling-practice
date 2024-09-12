@@ -1,0 +1,68 @@
+An app that allows users to create lists of words along with their definition and a usage example
+
+An app that allows users to generate printable learning games, that allow elementary aged kids to learn the words through fun and engaging techniques, with out a screen
+
+As a user, I'd like to create one or more list of words, along with a short definition and example. I'd like the ability to update the title, the word definition, or the example, without having to click a save button. I'd like to refresh the page, and have my word list re-load automatically. I'd like The ability to select one or more list of words, and have each word from all those lists be included in a practice game that I can print off and play. The available games would be Word Scramble, Missing Letter, Matching Game, Flash Cards, or Word Search
+
+
+
+---------------
+---------------
+
+
+
+
+
+- accept a list of words 
+- for each word, determine a certain number of letters to obfuscate, based on the percentage of vowels and consonants in each word. 
+
+
+- allow user to specify round-down percent of how many letters should be missing
+- allow user to specify if only consonants or vowels should be obfuscated
+
+- Word Jumble
+
+- Generate word matching game cards
+
+- generate flash cards
+
+
+
+---------
+---------
+
+
+- Create a GitHub repo for the container
+- define the initial scope of work, and outline in the repo read me
+> use Github project to define user stories
+> use Github to manage the deployment to 
+
+- Create a Site framework for the app
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

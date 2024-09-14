@@ -1,3 +1,5 @@
+/** @format */
+
 import { TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -13,7 +15,7 @@ export const SpellingListTitle: React.FC<EditableSpellingListTitleProps> = ({
   const { spellingLists, editSpellingList } = useSpellingListsContext();
 
   const selectedList = spellingLists.find((list) => list.id === listId);
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const {
     control,

@@ -12,6 +12,7 @@ import {
 import { IWordList } from "../../interfaces/IWordList";
 import { useState } from "react";
 import useSpellingListsContext from "../../context";
+import { isInputEmpty } from "../../utitility";
 
 const EditableWord = ({ targetWord }: { targetWord: string }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
@@ -30,7 +31,7 @@ const EditableWord = ({ targetWord }: { targetWord: string }) => {
   const onSubmit = (data: { targetWord: string }) => {
     if (!focusedList) return;
 
-    if (data.targetWord.trim() === "") {
+    if (isInputEmpty(data.targetWord)) {
       reset({ targetWord });
     }
 

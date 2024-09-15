@@ -16,7 +16,6 @@ export function ListContent() {
     }
 
     const updatedWordList = focusedList?.words.filter((word: string) => word !== targetWord);
-
     const updatedFocusedList = { ...focusedList, words: updatedWordList };
 
     editSpellingList(focusedList.id, updatedFocusedList);
@@ -33,7 +32,7 @@ export function ListContent() {
         {focusedList?.words && focusedList.words.length > 0 ? (
           <WordList words={focusedList.words} handleDeleteWord={handleDeleteWord} />
         ) : (
-          <ListItem>
+          <ListItem key="placeholder-word">
             <ListItemText>Add a word above!</ListItemText>
           </ListItem>
         )}

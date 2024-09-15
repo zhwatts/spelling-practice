@@ -32,12 +32,16 @@ const App = () => {
     }
   };
 
-  const handleCreateList = () =>
-    addSpellingList({
+  const handleCreateList = () => {
+    const newList = {
       id: spellingLists.length + 1,
       title: "A New List...",
       words: [],
-    });
+    };
+
+    addSpellingList(newList);
+    setFocusedList(newList);
+  };
 
   return (
     <Grid

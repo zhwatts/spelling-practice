@@ -2,7 +2,7 @@
 
 import { Grid2 as Grid, List, ListItem, ListItemText } from "@mui/material";
 import SpellingListTitle from "../../components/SpellingListTitle";
-import SpellingWordInput from "../../components/textinputs/SpellingWordInput";
+import SpellingWordInput from "../../components/TextInputs/SpellingWordInput";
 import useSpellingListsContext from "../../context";
 import WordList from "../../components/WordList";
 

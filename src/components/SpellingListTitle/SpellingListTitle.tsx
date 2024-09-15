@@ -1,7 +1,10 @@
+/** @format */
+
 import { TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import useSpellingListsContext from "../../context";
+import { isInputEmpty } from "../../utitility";
 
 interface EditableSpellingListTitleProps {
   listId: number;
@@ -10,10 +13,11 @@ interface EditableSpellingListTitleProps {
 export const SpellingListTitle: React.FC<EditableSpellingListTitleProps> = ({
   listId,
 }) => {
-  const { spellingLists, editSpellingList } = useSpellingListsContext();
+  const { spellingLists, editSpellingList, setFocusedList } =
+    useSpellingListsContext();
 
   const selectedList = spellingLists.find((list) => list.id === listId);
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const {
     control,
@@ -44,11 +48,15 @@ export const SpellingListTitle: React.FC<EditableSpellingListTitleProps> = ({
   }
 
   const onSubmit = (data: { title: string }) => {
-    if (data.title.trim() === "") {
+    if (isInputEmpty(data.title)) {
       reset({ title: selectedList.title });
     } else {
-      editSpellingList(listId, { ...selectedList, title: data.title });
+      const updatedList = { ...selectedList, title: data.title };
+
+      editSpellingList(listId, updatedList);
+      setFocusedList(updatedList);
     }
+
     setIsEditing(false);
   };
 

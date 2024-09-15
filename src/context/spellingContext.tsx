@@ -1,29 +1,23 @@
 /** @format */
 
-import React, { createContext, useContext, ReactNode, Dispatch, SetStateAction } from "react";
+import React, { createContext, useContext, ReactNode } from "react";
 
 import { useSpellingLists, useFocusList } from "@/hooks";
-import { ISpellingList } from "@/interfaces/ISpellingList";
+import { ISpellingListsContext } from "@/interfaces/ISpellingListsContext";
 
-interface SpellingListsContextType {
-  spellingLists: ISpellingList[];
-  focusedList: ISpellingList | undefined;
-  addSpellingList: (newList: ISpellingList) => void;
-  editSpellingList: (id: number, updatedList: ISpellingList) => void;
-  deleteSpellingList: (id: number) => void;
-  setFocusedList: Dispatch<SetStateAction<ISpellingList | undefined>>;
-}
-
-const SpellingListsContext = createContext<SpellingListsContextType | undefined>(undefined);
+const SpellingListsContext = createContext<ISpellingListsContext | undefined>(undefined);
 
 export const SpellingListsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const { spellingLists, addSpellingList, editSpellingList, deleteSpellingList } = useSpellingLists();
+  const { isListNew, setIsListNew, spellingLists, addSpellingList, editSpellingList, deleteSpellingList } =
+    useSpellingLists();
 
   const { focusedList, setFocusedList } = useFocusList();
 
   return (
     <SpellingListsContext.Provider
       value={{
+        isListNew,
+        setIsListNew,
         spellingLists,
         addSpellingList,
         editSpellingList,

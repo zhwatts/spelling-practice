@@ -12,7 +12,7 @@ import { ISpellingList } from "@/interfaces/ISpellingList";
 import SpellingLists from "@/components/lists/WordList";
 
 const App = () => {
-  const { spellingLists, addSpellingList, focusedList, setFocusedList } = useSpellingListsContext();
+  const { setIsListNew, spellingLists, addSpellingList, focusedList, setFocusedList } = useSpellingListsContext();
   const [checkedLists, setCheckedLists] = useState<ISpellingList[]>([]);
 
   useEffect(() => {
@@ -39,6 +39,7 @@ const App = () => {
       words: [],
     };
 
+    setIsListNew(true);
     addSpellingList(newList);
     setFocusedList(newList);
   };
@@ -58,7 +59,6 @@ const App = () => {
       <Grid container size={12} flexGrow={2} pt={8}>
         <Grid container direction="column" spacing={1}>
           <BrandedHeader />
-
           <SpellingLists
             handleCreateList={handleCreateList}
             focusedList={focusedList}
@@ -66,7 +66,6 @@ const App = () => {
             setFocusedList={setFocusedList}
             handleCheckedList={handleCheckedList}
           />
-
           <DownloadGameButton checkedListCount={Number(checkedLists.length)} />
         </Grid>
 

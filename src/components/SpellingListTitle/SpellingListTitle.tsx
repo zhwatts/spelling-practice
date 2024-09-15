@@ -11,10 +11,14 @@ interface EditableSpellingListTitleProps {
 }
 
 export const SpellingListTitle: React.FC<EditableSpellingListTitleProps> = ({ listId }) => {
-  const { spellingLists, editSpellingList, setFocusedList } = useSpellingListsContext();
+  const { spellingLists, editSpellingList, setFocusedList, isListNew, setIsListNew } = useSpellingListsContext();
 
   const selectedList = spellingLists.find((list) => list.id === listId);
   const [isEditing, setIsEditing] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsEditing(isListNew);
+  }, [isListNew]);
 
   const {
     control,
@@ -49,6 +53,7 @@ export const SpellingListTitle: React.FC<EditableSpellingListTitleProps> = ({ li
       setFocusedList(updatedList);
     }
 
+    setIsListNew(false);
     setIsEditing(false);
   };
 

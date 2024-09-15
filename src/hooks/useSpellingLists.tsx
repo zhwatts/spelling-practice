@@ -1,7 +1,7 @@
 /** @format */
 
 import { useState, useEffect } from "react";
-import { ISpellingList } from "../interfaces/ISpellingList";
+import { ISpellingList } from "@/interfaces/ISpellingList";
 
 export function useSpellingLists() {
   const [spellingLists, setSpellingLists] = useState<ISpellingList[]>([]);
@@ -39,9 +39,7 @@ export function useSpellingLists() {
 
   const editSpellingList = (id: number, updatedList: ISpellingList) => {
     setSpellingLists((prevLists) => {
-      const updatedLists = prevLists.map((list) =>
-        list.id === id ? updatedList : list
-      );
+      const updatedLists = prevLists.map((list) => (list.id === id ? updatedList : list));
 
       updateLocalStorage(updatedLists);
       return updatedLists;

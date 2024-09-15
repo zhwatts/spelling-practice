@@ -1,18 +1,18 @@
 /** @format */
 
-import { Grid2 as Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-import BrandedHeader from "./components/BrandedHeader";
-import DownloadGameButton from "./components/buttons/DownloadGameButton";
-import GlobalFooter from "./components/GlobalFooter";
-import ListContent from "./pages/ListContent";
-import { useSpellingListsContext } from "./context/spellingContext";
-import { ISpellingList } from "./interfaces/ISpellingList";
-import SpellingLists from "./components/lists/WordList";
+import { Grid2 as Grid } from "@mui/material";
+
+import BrandedHeader from "@/components/BrandedHeader";
+import DownloadGameButton from "@/components/buttons/DownloadGameButton";
+import GlobalFooter from "@/components/GlobalFooter";
+import ListContent from "@/pages/ListContent";
+import { useSpellingListsContext } from "@/context/spellingContext";
+import { ISpellingList } from "@/interfaces/ISpellingList";
+import SpellingLists from "@/components/lists/WordList";
 
 const App = () => {
-  const { spellingLists, addSpellingList, focusedList, setFocusedList } =
-    useSpellingListsContext();
+  const { spellingLists, addSpellingList, focusedList, setFocusedList } = useSpellingListsContext();
   const [checkedLists, setCheckedLists] = useState<ISpellingList[]>([]);
 
   useEffect(() => {
@@ -26,9 +26,7 @@ const App = () => {
     const itemChecked = checkedLists.includes(list);
 
     if (itemChecked) {
-      setCheckedLists(
-        checkedLists.filter((checkedList) => checkedList !== list)
-      );
+      setCheckedLists(checkedLists.filter((checkedList) => checkedList !== list));
     } else {
       setCheckedLists([...checkedLists, list]);
     }

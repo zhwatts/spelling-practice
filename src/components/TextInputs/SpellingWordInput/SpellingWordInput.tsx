@@ -3,15 +3,14 @@
 import { AddCircleOutline } from "@mui/icons-material";
 import { IconButton, TextField } from "@mui/material";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import useSpellingListsContext from "../../../context";
+import useSpellingListsContext from "@/context";
 
 type FormValues = {
   word: string;
 };
 
 export function SpellingWordInput() {
-  const { editSpellingList, focusedList, setFocusedList } =
-    useSpellingListsContext();
+  const { editSpellingList, focusedList, setFocusedList } = useSpellingListsContext();
 
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {

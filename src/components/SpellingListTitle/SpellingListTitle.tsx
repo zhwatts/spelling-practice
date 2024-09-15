@@ -1,19 +1,20 @@
+/** @format */
+
 import { TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import useSpellingListsContext from "../../context";
+import useSpellingListsContext from "@/context";
+import { isInputEmpty } from "@/utitility";
 
 interface EditableSpellingListTitleProps {
   listId: number;
 }
 
-export const SpellingListTitle: React.FC<EditableSpellingListTitleProps> = ({
-  listId,
-}) => {
-  const { spellingLists, editSpellingList } = useSpellingListsContext();
+export const SpellingListTitle: React.FC<EditableSpellingListTitleProps> = ({ listId }) => {
+  const { spellingLists, editSpellingList, setFocusedList } = useSpellingListsContext();
 
   const selectedList = spellingLists.find((list) => list.id === listId);
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const {
     control,
@@ -32,23 +33,22 @@ export const SpellingListTitle: React.FC<EditableSpellingListTitleProps> = ({
 
   if (!selectedList) {
     return (
-      <Typography
-        ml="34px"
-        component="h1"
-        variant="h4"
-        color="primary.contrastText"
-      >
+      <Typography ml="34px" component="h1" variant="h4" color="primary.contrastText">
         Spelling List Not Found
       </Typography>
     );
   }
 
   const onSubmit = (data: { title: string }) => {
-    if (data.title.trim() === "") {
+    if (isInputEmpty(data.title)) {
       reset({ title: selectedList.title });
     } else {
-      editSpellingList(listId, { ...selectedList, title: data.title });
+      const updatedList = { ...selectedList, title: data.title };
+
+      editSpellingList(listId, updatedList);
+      setFocusedList(updatedList);
     }
+
     setIsEditing(false);
   };
 

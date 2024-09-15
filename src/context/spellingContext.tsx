@@ -1,15 +1,9 @@
 /** @format */
 
-import React, {
-  createContext,
-  useContext,
-  ReactNode,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import React, { createContext, useContext, ReactNode, Dispatch, SetStateAction } from "react";
 
-import { useSpellingLists, useFocusList } from "../hooks";
-import { ISpellingList } from "../interfaces/ISpellingList";
+import { useSpellingLists, useFocusList } from "@/hooks";
+import { ISpellingList } from "@/interfaces/ISpellingList";
 
 interface SpellingListsContextType {
   spellingLists: ISpellingList[];
@@ -20,20 +14,10 @@ interface SpellingListsContextType {
   setFocusedList: Dispatch<SetStateAction<ISpellingList | undefined>>;
 }
 
-const SpellingListsContext = createContext<
-  SpellingListsContextType | undefined
->(undefined);
+const SpellingListsContext = createContext<SpellingListsContextType | undefined>(undefined);
 
-// Create a provider component
-export const SpellingListsProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
-  const {
-    spellingLists,
-    addSpellingList,
-    editSpellingList,
-    deleteSpellingList,
-  } = useSpellingLists();
+export const SpellingListsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const { spellingLists, addSpellingList, editSpellingList, deleteSpellingList } = useSpellingLists();
 
   const { focusedList, setFocusedList } = useFocusList();
 
@@ -56,9 +40,7 @@ export const SpellingListsProvider: React.FC<{ children: ReactNode }> = ({
 export const useSpellingListsContext = () => {
   const context = useContext(SpellingListsContext);
   if (context === undefined) {
-    throw new Error(
-      "useSpellingListsContext must be used within a SpellingListsProvider"
-    );
+    throw new Error("useSpellingListsContext must be used within a SpellingListsProvider");
   }
   return context;
 };

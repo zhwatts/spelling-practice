@@ -1,11 +1,9 @@
+/** @format */
+
 import { Downloading } from "@mui/icons-material";
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 
-export function DownloadGameButton({
-  checkedListCount,
-}: {
-  checkedListCount: number;
-}) {
+export function DownloadGameButton({ checkedListCount }: { checkedListCount: number }) {
   return (
     <Button
       disableElevation
@@ -14,15 +12,7 @@ export function DownloadGameButton({
       disabled={checkedListCount <= 0}
       sx={{ display: "flex", p: 0 }}
     >
-      <Stack
-        direction="row"
-        flexGrow={2}
-        py={2}
-        spacing={1}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-      >
+      <Stack direction="row" flexGrow={2} py={2} spacing={1} display="flex" justifyContent="center" alignItems="center">
         <Downloading />
         <Typography variant="body2">Create Game From</Typography>
       </Stack>

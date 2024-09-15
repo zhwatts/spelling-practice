@@ -1,10 +1,7 @@
+/** @format */
+
 import { RadioButtonChecked, RadioButtonUnchecked } from "@mui/icons-material";
-import {
-  IconButton,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-} from "@mui/material";
+import { IconButton, ListItem, ListItemButton, ListItemText } from "@mui/material";
 
 export const UnselectedWordListItem = ({
   id,

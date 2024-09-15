@@ -19,20 +19,11 @@ const SpellingListItem = ({
   checked?: boolean;
 }) =>
   selected ? (
-    <SelectedWordListItem
-      checked={checked}
-      id={id}
-      secondaryAction={secondaryAction}
-    >
+    <SelectedWordListItem checked={checked} id={id} secondaryAction={secondaryAction}>
       {children}
     </SelectedWordListItem>
   ) : (
-    <UnselectedWordListItem
-      checked={checked}
-      id={id}
-      primaryAction={primaryAction}
-      secondaryAction={secondaryAction}
-    >
+    <UnselectedWordListItem checked={checked} id={id} primaryAction={primaryAction} secondaryAction={secondaryAction}>
       {children}
     </UnselectedWordListItem>
   );

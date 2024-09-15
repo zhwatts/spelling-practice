@@ -1,23 +1,21 @@
 /** @format */
 
 import { Grid2 as Grid, List, ListItem, ListItemText } from "@mui/material";
-import SpellingListTitle from "../../components/SpellingListTitle";
-import SpellingWordInput from "../../components/TextInputs/SpellingWordInput";
-import useSpellingListsContext from "../../context";
-import WordList from "../../components/WordList";
+
+import SpellingListTitle from "@/components/SpellingListTitle";
+import SpellingWordInput from "@/components/TextInputs/SpellingWordInput";
+import useSpellingListsContext from "@/context";
+import WordList from "@/components/WordList";
 
 export function ListContent() {
-  const { focusedList, setFocusedList, editSpellingList } =
-    useSpellingListsContext();
+  const { focusedList, setFocusedList, editSpellingList } = useSpellingListsContext();
 
   const handleDeleteWord = ({ targetWord }: { targetWord: string }) => {
     if (!focusedList) {
       return;
     }
 
-    const updatedWordList = focusedList?.words.filter(
-      (word: string) => word !== targetWord
-    );
+    const updatedWordList = focusedList?.words.filter((word: string) => word !== targetWord);
 
     const updatedFocusedList = { ...focusedList, words: updatedWordList };
 
@@ -33,10 +31,7 @@ export function ListContent() {
 
       <List sx={{ px: "6px" }}>
         {focusedList?.words && focusedList.words.length > 0 ? (
-          <WordList
-            words={focusedList.words}
-            handleDeleteWord={handleDeleteWord}
-          />
+          <WordList words={focusedList.words} handleDeleteWord={handleDeleteWord} />
         ) : (
           <ListItem>
             <ListItemText>Add a word above!</ListItemText>

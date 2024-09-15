@@ -2,9 +2,9 @@
 
 import { Button, List, ListItem, Paper } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
-import useSpellingListsContext from "../../../context";
-import { ISpellingList } from "../../../interfaces/ISpellingList";
-import { SpellingList } from "../SpellingListItems";
+import useSpellingListsContext from "@/context";
+import { ISpellingList } from "@/interfaces/ISpellingList";
+import { SpellingList } from "@/components/lists/SpellingListItems";
 
 export function SpellingLists({
   handleCreateList,
@@ -34,12 +34,7 @@ export function SpellingLists({
     >
       <List sx={{ p: 2, pt: 0 }}>
         <ListItem sx={{ p: 0 }} key="create-btn">
-          <Button
-            fullWidth
-            disableElevation
-            disableRipple
-            onClick={handleCreateList}
-          >
+          <Button fullWidth disableElevation disableRipple onClick={handleCreateList}>
             Click to create a list
           </Button>
         </ListItem>

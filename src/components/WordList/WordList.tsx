@@ -1,23 +1,17 @@
 /** @format */
 
+import { useState } from "react";
 import { Delete } from "@mui/icons-material";
 import { Controller, useForm } from "react-hook-form";
-import {
-  IconButton,
-  ListItem,
-  ListItemIcon,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { IWordList } from "../../interfaces/IWordList";
-import { useState } from "react";
-import useSpellingListsContext from "../../context";
-import { isInputEmpty } from "../../utitility";
+import { IconButton, ListItem, ListItemIcon, TextField, Typography } from "@mui/material";
+
+import { IWordList } from "@/interfaces/IWordList";
+import useSpellingListsContext from "@/context";
+import { isInputEmpty } from "@/utitility";
 
 const EditableWord = ({ targetWord }: { targetWord: string }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
-  const { focusedList, editSpellingList, setFocusedList } =
-    useSpellingListsContext();
+  const { focusedList, editSpellingList, setFocusedList } = useSpellingListsContext();
 
   const {
     control,
@@ -35,9 +29,7 @@ const EditableWord = ({ targetWord }: { targetWord: string }) => {
       reset({ targetWord });
     }
 
-    const updatedWordsList = focusedList.words.map((word) =>
-      word === targetWord ? data.targetWord : word
-    );
+    const updatedWordsList = focusedList.words.map((word) => (word === targetWord ? data.targetWord : word));
 
     const updatedFocusedList = {
       ...focusedList,

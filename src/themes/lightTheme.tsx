@@ -1,3 +1,5 @@
+/** @format */
+
 import { PaletteMode } from "@mui/material";
 
 export const lightTheme = {

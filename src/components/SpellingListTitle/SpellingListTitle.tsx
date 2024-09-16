@@ -24,7 +24,7 @@ export const SpellingListTitle: React.FC<EditableSpellingListTitleProps> = ({ li
   }, [isListNew]);
 
   useEffect(() => {
-    if (isEditing && inputRef.current) {
+    if (isListNew && isEditing && inputRef.current) {
       inputRef.current.select();
     }
   }, [isEditing]);

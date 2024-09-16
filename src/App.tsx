@@ -1,7 +1,7 @@
 /** @format */
 
 import { useEffect } from "react";
-import { Grid2 as Grid } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 
 import BrandedHeader from "@/components/BrandedHeader";
 import DownloadGameButton from "@/components/buttons/DownloadGameButton";
@@ -38,7 +38,7 @@ const App = () => {
           <DownloadGameButton checkedListCount={0} />
         </Grid>
 
-        <ListContent />
+        {!!focusedList ? <ListContent /> : <Typography variant="h6">To get started, create a list!</Typography>}
       </Grid>
       <Grid container size={12}>
         <GlobalFooter />

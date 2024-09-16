@@ -1,7 +1,7 @@
 /** @format */
 
 import { TextField, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import useSpellingListsContext from "@/context";
 import { isInputEmpty } from "@/utitility";
@@ -15,10 +15,19 @@ export const SpellingListTitle: React.FC<EditableSpellingListTitleProps> = ({ li
 
   const selectedList = spellingLists.find((list) => list.id === listId);
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    setIsEditing(isListNew);
+    if (!!isListNew) {
+      setIsEditing(isListNew);
+    }
   }, [isListNew]);
+
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.select();
+    }
+  }, [isEditing]);
 
   const {
     control,
@@ -48,8 +57,7 @@ export const SpellingListTitle: React.FC<EditableSpellingListTitleProps> = ({ li
       reset({ title: selectedList.title });
     } else {
       const updatedList = { ...selectedList, title: data.title };
-
-      editSpellingList(listId, updatedList);
+      editSpellingList(updatedList.id, updatedList);
       setFocusedList(updatedList);
     }
 
@@ -72,6 +80,10 @@ export const SpellingListTitle: React.FC<EditableSpellingListTitleProps> = ({ li
                 fullWidth
                 size="small"
                 sx={{ p: 0, px: "34px", m: 0 }}
+                inputRef={(e) => {
+                  field.ref(e);
+                  inputRef.current = e;
+                }}
                 slotProps={{
                   input: {
                     sx: {

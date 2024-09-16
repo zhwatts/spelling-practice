@@ -1,6 +1,7 @@
 /** @format */
 
 import { useState, useEffect } from "react";
+
 import { ISpellingList } from "@/interfaces/ISpellingList";
 import { placeHolderList } from "@/utitility/placeHolderList";
 

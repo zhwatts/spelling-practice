@@ -8,6 +8,7 @@ const SpellingListItem = ({
   children,
   primaryAction,
   secondaryAction,
+  deleteList,
   selected,
   checked,
 }: {
@@ -15,11 +16,12 @@ const SpellingListItem = ({
   children: React.ReactNode;
   primaryAction: VoidFunction;
   secondaryAction: VoidFunction;
+  deleteList: VoidFunction;
   selected?: boolean;
   checked?: boolean;
 }) =>
   selected ? (
-    <SelectedWordListItem checked={checked} id={id} secondaryAction={secondaryAction}>
+    <SelectedWordListItem checked={checked} id={id} handleDeleteList={deleteList} secondaryAction={secondaryAction}>
       {children}
     </SelectedWordListItem>
   ) : (

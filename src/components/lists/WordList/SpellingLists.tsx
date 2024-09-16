@@ -7,7 +7,7 @@ import { ISpellingList } from "@/interfaces/ISpellingList";
 import { SpellingList } from "@/components/lists/SpellingListItems";
 
 export function SpellingLists() {
-  const { isListNew, setIsListNew, spellingLists, addSpellingList, focusedList, setFocusedList } =
+  const { isListNew, setIsListNew, spellingLists, addSpellingList, deleteSpellingList, focusedList, setFocusedList } =
     useSpellingListsContext();
   const [checkedLists, setCheckedLists] = useState<ISpellingList[]>([]);
 
@@ -36,6 +36,18 @@ export function SpellingLists() {
     setFocusedList(newList);
   };
 
+  const handleDeleteList = (list: ISpellingList) => {
+    const remainingLists = deleteSpellingList(list.id);
+
+    if (list.id === focusedList?.id) {
+      setFocusedList(undefined);
+    }
+
+    if (remainingLists.length > 0) {
+      setFocusedList(remainingLists.at(-1));
+    }
+  };
+
   return (
     <Paper
       elevation={0}
@@ -62,6 +74,7 @@ export function SpellingLists() {
             checked={checkedLists.includes(list)}
             primaryAction={() => setFocusedList(list)}
             secondaryAction={() => handleCheckedList(list)}
+            deleteList={() => handleDeleteList(list)}
           >
             {list.title}
           </SpellingList>

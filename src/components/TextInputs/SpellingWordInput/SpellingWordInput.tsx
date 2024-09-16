@@ -44,6 +44,7 @@ export function SpellingWordInput() {
             {...field}
             fullWidth
             autoFocus
+            disabled={!focusedList}
             autoComplete="off"
             variant="outlined"
             slotProps={{

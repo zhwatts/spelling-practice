@@ -1,6 +1,6 @@
 /** @format */
 
-import { Delete } from "@mui/icons-material";
+import { DeleteForeverOutlined } from "@mui/icons-material";
 import { IconButton, ListItem, ListItemIcon } from "@mui/material";
 
 import { IWordList } from "@/interfaces/IWordList";
@@ -22,7 +22,7 @@ export const WordList: React.FC<IWordList> = ({ words, handleDeleteWord }) =>
     >
       <ListItemIcon>
         <IconButton onClick={() => handleDeleteWord({ targetWord: word })}>
-          <Delete color={"primary"} />
+          <DeleteForeverOutlined color={"error"} />
         </IconButton>
 
         <EditableWord targetWord={word} />

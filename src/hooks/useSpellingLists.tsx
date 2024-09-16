@@ -1,22 +1,19 @@
 /** @format */
 
 import { useState, useEffect } from "react";
+
 import { ISpellingList } from "@/interfaces/ISpellingList";
+import { placeHolderList } from "@/utitility/placeHolderList";
 
 export function useSpellingLists() {
   const [spellingLists, setSpellingLists] = useState<ISpellingList[]>([]);
+  const [isListNew, setIsListNew] = useState<boolean>(false);
 
   useEffect(() => {
     const storedLists = localStorage.getItem("spellingLists");
 
     if (!storedLists) {
-      const placeholderList: ISpellingList[] = [
-        {
-          id: 1,
-          title: "My First Spelling List",
-          words: ["Glance", "Chance", "Prance", "Dance", "Stance"],
-        },
-      ];
+      const placeholderList: ISpellingList[] = [placeHolderList];
 
       localStorage.setItem("spellingLists", JSON.stringify(placeholderList));
       setSpellingLists(placeholderList);
@@ -55,6 +52,8 @@ export function useSpellingLists() {
   };
 
   return {
+    isListNew,
+    setIsListNew,
     spellingLists,
     addSpellingList,
     editSpellingList,

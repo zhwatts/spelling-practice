@@ -1,25 +1,40 @@
 /** @format */
 
 import { Button, List, ListItem, Paper } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import useSpellingListsContext from "@/context";
 import { ISpellingList } from "@/interfaces/ISpellingList";
 import { SpellingList } from "@/components/lists/SpellingListItems";
 
-export function SpellingLists({
-  handleCreateList,
-  focusedList,
-  checkedLists,
-  setFocusedList,
-  handleCheckedList,
-}: {
-  handleCreateList: VoidFunction;
-  focusedList?: ISpellingList;
-  checkedLists: ISpellingList[];
-  setFocusedList: Dispatch<SetStateAction<ISpellingList | undefined>>;
-  handleCheckedList: (list: ISpellingList) => void;
-}) {
-  const { spellingLists } = useSpellingListsContext();
+export function SpellingLists() {
+  const { isListNew, setIsListNew, spellingLists, addSpellingList, focusedList, setFocusedList } =
+    useSpellingListsContext();
+  const [checkedLists, setCheckedLists] = useState<ISpellingList[]>([]);
+
+  const handleCheckedList = (list: ISpellingList) => {
+    const itemChecked = checkedLists.includes(list);
+
+    if (itemChecked) {
+      setCheckedLists(checkedLists.filter((checkedList) => checkedList !== list));
+    } else {
+      setCheckedLists([...checkedLists, list]);
+    }
+  };
+
+  const handleCreateList = () => {
+    const newList = {
+      id: spellingLists.length + 1,
+      title: "A New List...",
+      words: [],
+    };
+
+    if (!isListNew) {
+      setIsListNew(true);
+    }
+
+    addSpellingList(newList);
+    setFocusedList(newList);
+  };
 
   return (
     <Paper

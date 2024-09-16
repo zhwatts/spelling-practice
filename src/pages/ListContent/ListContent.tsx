@@ -33,7 +33,7 @@ export function ListContent() {
           <WordList words={focusedList.words} handleDeleteWord={handleDeleteWord} />
         ) : (
           <ListItem key="placeholder-word">
-            <ListItemText>Add a word above!</ListItemText>
+            <ListItemText>Enter a word above, to add it to the {focusedList?.title} list!</ListItemText>
           </ListItem>
         )}
       </List>

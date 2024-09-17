@@ -4,6 +4,7 @@ import React, { createContext, useContext, ReactNode } from "react";
 
 import { useSpellingLists, useFocusList } from "@/hooks";
 import { ISpellingListsContext } from "@/interfaces/ISpellingListsContext";
+import { useCheckedLists } from "@/hooks/useCheckedLists";
 
 const SpellingListsContext = createContext<ISpellingListsContext | undefined>(undefined);
 
@@ -12,6 +13,8 @@ export const SpellingListsProvider: React.FC<{ children: ReactNode }> = ({ child
     useSpellingLists();
 
   const { focusedList, setFocusedList } = useFocusList();
+
+  const { checkedLists, handleCheckedList } = useCheckedLists();
 
   return (
     <SpellingListsContext.Provider
@@ -24,6 +27,8 @@ export const SpellingListsProvider: React.FC<{ children: ReactNode }> = ({ child
         deleteSpellingList,
         focusedList,
         setFocusedList,
+        checkedLists,
+        handleCheckedList,
       }}
     >
       {children}

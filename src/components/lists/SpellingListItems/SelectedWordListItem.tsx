@@ -1,17 +1,19 @@
 /** @format */
 
-import { RadioButtonChecked, RadioButtonUnchecked } from "@mui/icons-material";
+import { DeleteForeverOutlined, RadioButtonChecked, RadioButtonUnchecked } from "@mui/icons-material";
 import { IconButton, ListItem, ListItemText } from "@mui/material";
 
 export const SelectedWordListItem = ({
   id,
   children,
   secondaryAction,
+  handleDeleteList,
   checked,
 }: {
   id: number;
   children: React.ReactNode;
   secondaryAction: VoidFunction;
+  handleDeleteList: VoidFunction;
   checked?: boolean;
 }): React.ReactElement => (
   <ListItem
@@ -32,13 +34,16 @@ export const SelectedWordListItem = ({
     }
   >
     <ListItemText
+      primary={children}
       sx={{
         textOverflow: "ellipsis",
         whiteSpace: "nowrap",
         overflow: "hidden",
+        flexGrow: 2,
       }}
-    >
-      {children}
-    </ListItemText>
+    />
+    <IconButton onClick={handleDeleteList}>
+      <DeleteForeverOutlined />
+    </IconButton>
   </ListItem>
 );

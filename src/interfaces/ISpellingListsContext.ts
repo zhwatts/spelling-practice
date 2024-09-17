@@ -9,7 +9,9 @@ export interface ISpellingListsContext {
   focusedList: ISpellingList | undefined;
   addSpellingList: (newList: ISpellingList) => void;
   editSpellingList: (id: number, updatedList: ISpellingList) => void;
-  deleteSpellingList: (id: number) => void;
+  deleteSpellingList: (id: number) => ISpellingList[];
   setFocusedList: Dispatch<SetStateAction<ISpellingList | undefined>>;
   setIsListNew: Dispatch<SetStateAction<boolean>>;
+  checkedLists: number[];
+  handleCheckedList: (list: ISpellingList) => void;
 }

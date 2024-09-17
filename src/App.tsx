@@ -1,23 +1,29 @@
 /** @format */
 
 import { useEffect } from "react";
-import { Grid2 as Grid } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 
 import BrandedHeader from "@/components/BrandedHeader";
 import DownloadGameButton from "@/components/buttons/DownloadGameButton";
 import GlobalFooter from "@/components/GlobalFooter";
 import ListContent from "@/pages/ListContent";
 import { useSpellingListsContext } from "@/context/spellingContext";
-import SpellingLists from "@/components/lists/WordList";
+import SpellingLists from "@/components/lists/SpellingList";
 
 const App = () => {
-  const { spellingLists, focusedList, setFocusedList } = useSpellingListsContext();
+  const { spellingLists, focusedList, setFocusedList, checkedLists, handleCheckedList } = useSpellingListsContext();
 
   useEffect(() => {
     if (!focusedList && spellingLists.length > 0) {
       setFocusedList(spellingLists[0]);
     }
   }, [spellingLists, setFocusedList, focusedList]);
+
+  useEffect(() => {
+    if (focusedList && checkedLists.length < 1) {
+      handleCheckedList(spellingLists[0]);
+    }
+  }, [focusedList]);
 
   return (
     <Grid
@@ -35,10 +41,11 @@ const App = () => {
         <Grid container direction="column" spacing={1}>
           <BrandedHeader />
           <SpellingLists />
-          <DownloadGameButton checkedListCount={0} />
+
+          <DownloadGameButton checkedListCount={checkedLists.length} />
         </Grid>
 
-        <ListContent />
+        {!!focusedList ? <ListContent /> : <Typography variant="h6">To get started, create a list!</Typography>}
       </Grid>
       <Grid container size={12}>
         <GlobalFooter />

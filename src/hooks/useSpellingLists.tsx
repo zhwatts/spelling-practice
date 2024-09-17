@@ -44,11 +44,16 @@ export function useSpellingLists() {
   };
 
   const deleteSpellingList = (id: number) => {
+    let remainingLists: ISpellingList[] = [];
+
     setSpellingLists((prevLists) => {
-      const updatedLists = prevLists.filter((list) => list.id !== id);
-      updateLocalStorage(updatedLists);
-      return updatedLists;
+      remainingLists = prevLists.filter((list) => list.id !== id);
+      updateLocalStorage(remainingLists);
+
+      return remainingLists;
     });
+
+    return remainingLists;
   };
 
   return {

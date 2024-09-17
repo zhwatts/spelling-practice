@@ -44,9 +44,13 @@ export function SpellingWordInput() {
             {...field}
             fullWidth
             autoFocus
+            disabled={!focusedList}
             autoComplete="off"
             variant="outlined"
             slotProps={{
+              htmlInput: {
+                maxLength: 35,
+              },
               input: {
                 startAdornment: (
                   <IconButton size="large" type="submit">

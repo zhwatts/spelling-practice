@@ -12,4 +12,6 @@ export interface ISpellingListsContext {
   deleteSpellingList: (id: number) => ISpellingList[];
   setFocusedList: Dispatch<SetStateAction<ISpellingList | undefined>>;
   setIsListNew: Dispatch<SetStateAction<boolean>>;
+  checkedLists: number[];
+  handleCheckedList: (list: ISpellingList) => void;
 }

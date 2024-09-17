@@ -11,13 +11,19 @@ import { useSpellingListsContext } from "@/context/spellingContext";
 import SpellingLists from "@/components/lists/SpellingList";
 
 const App = () => {
-  const { spellingLists, focusedList, setFocusedList } = useSpellingListsContext();
+  const { spellingLists, focusedList, setFocusedList, checkedLists, handleCheckedList } = useSpellingListsContext();
 
   useEffect(() => {
     if (!focusedList && spellingLists.length > 0) {
       setFocusedList(spellingLists[0]);
     }
   }, [spellingLists, setFocusedList, focusedList]);
+
+  useEffect(() => {
+    if (focusedList && checkedLists.length < 1) {
+      handleCheckedList(spellingLists[0]);
+    }
+  }, [focusedList]);
 
   return (
     <Grid

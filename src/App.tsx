@@ -41,7 +41,8 @@ const App = () => {
         <Grid container direction="column" spacing={1}>
           <BrandedHeader />
           <SpellingLists />
-          <DownloadGameButton checkedListCount={0} />
+
+          <DownloadGameButton checkedListCount={checkedLists.length} />
         </Grid>
 
         {!!focusedList ? <ListContent /> : <Typography variant="h6">To get started, create a list!</Typography>}

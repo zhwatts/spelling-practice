@@ -36,6 +36,10 @@ export function SpellingLists() {
   const handleDeleteList = (list: ISpellingList) => {
     const remainingLists = deleteSpellingList(list.id);
 
+    if (checkedLists.includes(list.id)) {
+      handleCheckedList(list);
+    }
+
     if (list.id === focusedList?.id) {
       setFocusedList(undefined);
     }

@@ -59,9 +59,9 @@ export function SpellingLists() {
         p: "10px 0",
       }}
     >
-      <List sx={{ p: 2, pt: 0 }}>
+      <List sx={{ px: 2 }}>
         <ListItem sx={{ p: 0 }} key="create-btn">
-          <Button fullWidth disableElevation disableRipple onClick={handleCreateList}>
+          <Button fullWidth disableElevation onClick={handleCreateList}>
             Click to create a list
           </Button>
         </ListItem>

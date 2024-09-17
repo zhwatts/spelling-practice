@@ -8,7 +8,7 @@ import DownloadGameButton from "@/components/buttons/DownloadGameButton";
 import GlobalFooter from "@/components/GlobalFooter";
 import ListContent from "@/pages/ListContent";
 import { useSpellingListsContext } from "@/context/spellingContext";
-import SpellingLists from "@/components/lists/WordList";
+import SpellingLists from "@/components/lists/SpellingList";
 
 const App = () => {
   const { spellingLists, focusedList, setFocusedList } = useSpellingListsContext();

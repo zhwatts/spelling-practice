@@ -19,8 +19,11 @@ export function SpellingLists() {
   } = useSpellingListsContext();
 
   const handleCreateList = () => {
+    const newListId = spellingLists.length > 0 ? spellingLists[spellingLists.length - 1].id + 1 : 0;
+    // const newListId = spellingLists.length > 0 ? spellingLists.at(-1).id : 0;
+
     const newList = {
-      id: spellingLists.length + 1,
+      id: newListId,
       title: "A New List...",
       words: [],
     };

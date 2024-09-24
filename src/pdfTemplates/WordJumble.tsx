@@ -7,8 +7,18 @@ const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
     padding: 20,
-    paddingBottom: 50,
+    paddingBottom: 70,
     position: "relative",
+  },
+
+  footer: {
+    position: "absolute",
+    bottom: 70,
+    color: "#999",
+    left: 0,
+    right: 0,
+    textAlign: "center", // Center the page number
+    fontSize: 9,
   },
 
   wordBankContainer: { border: "1px solid #000", padding: 10, flexGrow: 0 },
@@ -38,16 +48,6 @@ const styles = StyleSheet.create({
     borderBottom: "1px dotted black", // Adds a dotted line under each word
     marginBottom: 15, // Adds extra space between words
     boxSizing: "border-box",
-  },
-
-  footer: {
-    position: "absolute",
-    bottom: 40, // Place the footer 10 units from the bottom of the page
-    color: "#999",
-    left: 0,
-    right: 0,
-    textAlign: "center", // Center the page number
-    fontSize: 12,
   },
 
   titleText: { textAlign: "center", fontWeight: "black", fontSize: 15, color: "#666", marginBottom: 10, padding: 5 },
@@ -103,7 +103,9 @@ export const WordJumble = ({
 
         <Text
           style={styles.footer}
-          render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`}
+          render={({ pageNumber, totalPages }) =>
+            `${focusedList.title} (Word Jumble) | Page ${pageNumber} of ${totalPages}`
+          }
           fixed
         />
       </Page>

@@ -1,15 +1,41 @@
 /** @format */
 
+import useSpellingListsContext from "@/context";
+import { WordJumble } from "@/pdfTemplates";
+
 import { Downloading } from "@mui/icons-material";
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
+import { pdf } from "@react-pdf/renderer";
 
 export function DownloadGameButton({ checkedListCount }: { checkedListCount: number }) {
+  const { focusedList } = useSpellingListsContext();
+
+  const renderGame = async () => {
+    if (!focusedList) return alert("Must select at least one list");
+
+    const doc = <WordJumble focusedList={focusedList} />;
+
+    const pdfInstance = pdf(doc);
+    const blob = await pdfInstance.toBlob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = `${focusedList?.title}.pdf`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url); // Release the object URL to free up memory
+  };
+
   return (
     <Button
       disableElevation
       variant="contained"
       color="secondary"
       disabled={checkedListCount <= 0}
+      onClick={renderGame}
       sx={{ display: "flex", p: 0 }}
     >
       <Stack direction="row" flexGrow={2} py={2} spacing={1} display="flex" justifyContent="center" alignItems="center">

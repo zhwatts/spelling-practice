@@ -1,7 +1,7 @@
 /** @format */
 
 import { useEffect } from "react";
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { FormControl, Grid2 as Grid, InputLabel, MenuItem, Select, Typography } from "@mui/material";
 
 import BrandedHeader from "@/components/BrandedHeader";
 import DownloadGameButton from "@/components/buttons/DownloadGameButton";
@@ -41,6 +41,20 @@ const App = () => {
         <Grid container direction="column" spacing={1}>
           <BrandedHeader />
           <SpellingLists />
+
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Game Type</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={"wordjumble"}
+              label="Game Type"
+              // onChange={handleChange}
+            >
+              <MenuItem value={"wordjumble"}>Word Jumble</MenuItem>
+              <MenuItem value={"missingletter"}>Missing Letter</MenuItem>
+            </Select>
+          </FormControl>
 
           <DownloadGameButton checkedListCount={checkedLists.length} />
         </Grid>

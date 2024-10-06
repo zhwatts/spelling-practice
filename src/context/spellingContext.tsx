@@ -12,7 +12,7 @@ export const SpellingListsProvider: React.FC<{ children: ReactNode }> = ({ child
   const { isListNew, setIsListNew, spellingLists, addSpellingList, editSpellingList, deleteSpellingList } =
     useSpellingLists();
 
-  const { focusedList, setFocusedList } = useFocusList();
+  const { focusedList, setFocusedList, gameType, setGameType } = useFocusList();
 
   const { checkedLists, handleCheckedList } = useCheckedLists();
 
@@ -29,6 +29,8 @@ export const SpellingListsProvider: React.FC<{ children: ReactNode }> = ({ child
         setFocusedList,
         checkedLists,
         handleCheckedList,
+        gameType,
+        setGameType,
       }}
     >
       {children}

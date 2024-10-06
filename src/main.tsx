@@ -12,7 +12,7 @@ import { createBrowserRouter, RouterProvider, useParams } from "react-router-dom
 import { DocumentProps, PDFViewer } from "@react-pdf/renderer";
 
 import { placeHolderList } from "./utitility/placeHolderList";
-import { WordJumble } from "./pdfTemplates";
+import { MissingLetter, WordJumble } from "./pdfTemplates";
 
 const PDFDisplay = () => {
   const { listCount, gameType } = useParams();
@@ -33,6 +33,20 @@ const PDFDisplay = () => {
         height="100%"
         children={
           <WordJumble
+            documentProps={defaultDocumentProps}
+            focusedList={{ ...placeHolderList, words: placeHolderList.words.slice(0, Number(listCount)) }}
+          />
+        }
+      />
+    );
+  if (gameType?.toLowerCase() === "missingletter")
+    return (
+      <PDFViewer
+        showToolbar
+        width="100%"
+        height="100%"
+        children={
+          <MissingLetter
             documentProps={defaultDocumentProps}
             focusedList={{ ...placeHolderList, words: placeHolderList.words.slice(0, Number(listCount)) }}
           />

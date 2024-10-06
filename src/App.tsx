@@ -1,7 +1,7 @@
 /** @format */
 
 import { useEffect } from "react";
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Grid2 as Grid, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 
 import BrandedHeader from "@/components/BrandedHeader";
 import DownloadGameButton from "@/components/buttons/DownloadGameButton";
@@ -9,9 +9,11 @@ import GlobalFooter from "@/components/GlobalFooter";
 import ListContent from "@/pages/ListContent";
 import { useSpellingListsContext } from "@/context/spellingContext";
 import SpellingLists from "@/components/lists/SpellingList";
+import { IGameType } from "./interfaces/IGameType";
 
 const App = () => {
-  const { spellingLists, focusedList, setFocusedList, checkedLists, handleCheckedList } = useSpellingListsContext();
+  const { spellingLists, focusedList, setFocusedList, checkedLists, handleCheckedList, gameType, setGameType } =
+    useSpellingListsContext();
 
   useEffect(() => {
     if (!focusedList && spellingLists.length > 0) {
@@ -41,6 +43,17 @@ const App = () => {
         <Grid container direction="column" spacing={1}>
           <BrandedHeader />
           <SpellingLists />
+
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={gameType}
+            label="Game Type"
+            onChange={(event: SelectChangeEvent) => setGameType(event.target.value as IGameType)}
+          >
+            <MenuItem value={"wordjumble"}>Word Jumble</MenuItem>
+            <MenuItem value={"missingletter"}>Missing Letter</MenuItem>
+          </Select>
 
           <DownloadGameButton checkedListCount={checkedLists.length} />
         </Grid>

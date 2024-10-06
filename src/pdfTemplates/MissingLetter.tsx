@@ -1,7 +1,7 @@
 /** @format */
 import { ISpellingList } from "@/interfaces/ISpellingList";
 import { Page, Text, View, Document, StyleSheet, DocumentProps } from "@react-pdf/renderer";
-import { dropLettersFromWord, jumbleWord, shuffleArray } from "./wordUtilities";
+import { dropLettersFromWord, shuffleArray } from "./wordUtilities";
 
 const styles = StyleSheet.create({
   page: {

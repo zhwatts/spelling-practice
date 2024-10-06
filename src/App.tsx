@@ -1,7 +1,7 @@
 /** @format */
 
 import { useEffect } from "react";
-import { FormControl, Grid2 as Grid, InputLabel, MenuItem, Select, Typography } from "@mui/material";
+import { Grid2 as Grid, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 
 import BrandedHeader from "@/components/BrandedHeader";
 import DownloadGameButton from "@/components/buttons/DownloadGameButton";
@@ -9,9 +9,11 @@ import GlobalFooter from "@/components/GlobalFooter";
 import ListContent from "@/pages/ListContent";
 import { useSpellingListsContext } from "@/context/spellingContext";
 import SpellingLists from "@/components/lists/SpellingList";
+import { IGameType } from "./interfaces/IGameType";
 
 const App = () => {
-  const { spellingLists, focusedList, setFocusedList, checkedLists, handleCheckedList } = useSpellingListsContext();
+  const { spellingLists, focusedList, setFocusedList, checkedLists, handleCheckedList, gameType, setGameType } =
+    useSpellingListsContext();
 
   useEffect(() => {
     if (!focusedList && spellingLists.length > 0) {
@@ -42,19 +44,16 @@ const App = () => {
           <BrandedHeader />
           <SpellingLists />
 
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Game Type</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={"wordjumble"}
-              label="Game Type"
-              // onChange={handleChange}
-            >
-              <MenuItem value={"wordjumble"}>Word Jumble</MenuItem>
-              <MenuItem value={"missingletter"}>Missing Letter</MenuItem>
-            </Select>
-          </FormControl>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={gameType}
+            label="Game Type"
+            onChange={(event: SelectChangeEvent) => setGameType(event.target.value as IGameType)}
+          >
+            <MenuItem value={"wordjumble"}>Word Jumble</MenuItem>
+            <MenuItem value={"missingletter"}>Missing Letter</MenuItem>
+          </Select>
 
           <DownloadGameButton checkedListCount={checkedLists.length} />
         </Grid>

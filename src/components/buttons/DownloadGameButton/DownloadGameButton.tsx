@@ -1,19 +1,29 @@
 /** @format */
 
 import useSpellingListsContext from "@/context";
-import { WordJumble } from "@/pdfTemplates";
+import { IGameType } from "@/interfaces/IGameType";
+import { MissingLetter, WordJumble } from "@/pdfTemplates";
 
 import { Downloading } from "@mui/icons-material";
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import { pdf } from "@react-pdf/renderer";
 
 export function DownloadGameButton({ checkedListCount }: { checkedListCount: number }) {
-  const { focusedList } = useSpellingListsContext();
+  const { gameType, focusedList } = useSpellingListsContext();
 
   const renderGame = async () => {
     if (!focusedList) return alert("Must select at least one list");
 
-    const doc = <WordJumble focusedList={focusedList} />;
+    let doc;
+
+    switch (gameType) {
+      case IGameType.MissingLetter:
+        doc = <MissingLetter focusedList={focusedList} />;
+        break;
+      default:
+        doc = <WordJumble focusedList={focusedList} />;
+        break;
+    }
 
     const pdfInstance = pdf(doc);
     const blob = await pdfInstance.toBlob();

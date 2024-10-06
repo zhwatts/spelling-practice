@@ -2,6 +2,7 @@
 
 import { Dispatch, SetStateAction } from "react";
 import { ISpellingList } from "./ISpellingList";
+import { IGameType } from "./IGameType";
 
 export interface ISpellingListsContext {
   isListNew: boolean;
@@ -14,4 +15,6 @@ export interface ISpellingListsContext {
   setIsListNew: Dispatch<SetStateAction<boolean>>;
   checkedLists: number[];
   handleCheckedList: (list: ISpellingList) => void;
+  gameType: IGameType;
+  setGameType: Dispatch<SetStateAction<IGameType>>;
 }
